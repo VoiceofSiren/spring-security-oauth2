@@ -1,14 +1,16 @@
 server:
   port: 8081
 
+
 spring:
+  '''
   security:
     oauth2:
       client:
         ## 1. 클라이언트 설정
         registration:
           keycloak:
-            # 1) OAuth 2.0 권한 부여 타입
+            # 1) OAuth 2.0 권한 부여 타입 (authorization_code, implicit, client_credentials, password 중 선택)
             authorization-grant-type: authorization_code
             # 2) 서비스 공급자에게 등록된 클라이언트 ID
             client-id: oauth2-client-app
@@ -18,7 +20,7 @@ spring:
             client-secret: 0BVSwKvJ70crOjNs8hSDfXbC7Vwi8KLL
             # 5) 인가 서버에서 권한 코드를 부여한 후 클라이언트로 redirect하는 위치
             redirect-uri: http://localhost:8081/login/oauth2/code/keycloak
-            # 6) 클라이언트 자격 증명 전송 방식
+            # 6) 클라이언트 자격 증명 전송 방식 (basic, post, none 중 선택)
             client-authentication-method: client_secret_basic
             # 7) 리소스 접근 제한 범위
             scope: openid,profile,email
@@ -27,9 +29,9 @@ spring:
           keycloak:
             # 1) OAuth 2.0 권한 코드 부여 end-point
             authorization-uri: http://localhost:8080/realms/oauth2/protocol/openid-connect/auth
-            # 2) 서비스 공급자 위치
+            # 2) 인가 서버의 위치를 나타내는 URI
             issuer-uri: http://localhost:8080/realms/oauth2
-            # 3) OAuth 2.0 JwkSetUri end-point
+            # 3) OAuth 2.0 인가 서버에서 JWK (JSON Web Key) Set을 가져올 때 사용할 URI
             jwk-set-uri: http://localhost:8080/realms/oauth2/protocol/openid-connect/certs
             # 4) OAuth 2.0 token end-point
             token-uri: http://localhost:8080/realms/oauth2/protocol/openid-connect/token
@@ -37,3 +39,4 @@ spring:
             user-info-uri: http://localhost:8080/realms/oauth2/protocol/openid-connect/userinfo
             # 6) OAuth 2.0 username을 추출하는 클레임 이름 (Google: sub / NAVER: id)
             user-name-attribute: preferred_username
+  '''
