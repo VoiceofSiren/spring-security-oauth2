@@ -3,7 +3,6 @@ server:
 
 
 spring:
-  '''
   security:
     oauth2:
       client:
@@ -39,4 +38,3 @@ spring:
             user-info-uri: http://localhost:8080/realms/oauth2/protocol/openid-connect/userinfo
             # 6) OAuth 2.0 username을 추출하는 클레임 이름 (Google: sub / NAVER: id)
             user-name-attribute: preferred_username
-  '''

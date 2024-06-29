@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
-    @Autowired
-    private ClientRegistrationRepository clientRegistrationRepository;
+/*    @Autowired
+    private ClientRegistrationRepository clientRegistrationRepository;*/
 
     @GetMapping("/")
     public String index() {
 
-        ClientRegistration keycloakClientRegistration = clientRegistrationRepository.findByRegistrationId("keycloak");
+/*        ClientRegistration keycloakClientRegistration = clientRegistrationRepository.findByRegistrationId("keycloak");
 
         String clientId = keycloakClientRegistration.getClientId();
         System.out.println("clientId = " + clientId);
 
         String redirectUri = keycloakClientRegistration.getRedirectUri();
-        System.out.println("redirectUri = " + redirectUri);
+        System.out.println("redirectUri = " + redirectUri);*/
 
 
         return "index";
