@@ -37,7 +37,7 @@ public class OAuth2ClientConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .oauth2Login(Customizer.withDefaults())
         ;
 
