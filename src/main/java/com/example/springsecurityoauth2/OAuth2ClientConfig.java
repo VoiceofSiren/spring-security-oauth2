@@ -43,8 +43,15 @@ public class OAuth2ClientConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").permitAll()
-                        .anyRequest().permitAll())
-                .oauth2Login(Customizer.withDefaults())
+                        .anyRequest().authenticated()
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")
+                        .authorizationEndpoint(authorizationEndpointConfig -> authorizationEndpointConfig
+                                .baseUri("/oauth2/v1/authorization"))
+                        .redirectionEndpoint(redirectionEndpointConfig -> redirectionEndpointConfig
+                                .baseUri("/login/v1/oauth2/code/*"))
+                )
                 .logout(logout -> logout
                         .logoutSuccessHandler(oidcLogoutSuccessHandler())
                         .invalidateHttpSession(true)
