@@ -7,21 +7,43 @@ spring:
       client:
         ## 1. 클라이언트 설정
         registration:
-          keycloak:
-            # 1) OAuth 2.0 권한 부여 타입 (authorization_code, implicit, client_credentials, password 중 선택)
-            authorizationGrantType: authorization_code
-            # 2) 서비스 공급자에게 등록된 클라이언트 ID
+          keycloak1:
+            # 1) 서비스 공급자에게 등록된 클라이언트 ID
             clientId: oauth2-client-app
-            # 3) 클라이언트 이름
+            # 2) 클라이언트 이름
             clientName: oauth2-client-app
-            # 4) 서비스 공급자에게 등록된 클라이언트 비밀번호
+            # 3) 서비스 공급자에게 등록된 클라이언트 비밀번호
             clientSecret: 0BVSwKvJ70crOjNs8hSDfXbC7Vwi8KLL
+            # 4) OAuth 2.0 권한 부여 타입 (authorization_code, implicit, client_credentials, password 중 선택)
+            authorizationGrantType: authorization_code
             # 5) 인가 서버에서 권한 코드를 부여한 후 클라이언트로 redirect하는 위치
-            redirectUri: http://localhost:8081/login/v1/oauth2/code/keycloak
+            redirectUri: http://localhost:8081/login/oauth2/code/keycloak
             # 6) 클라이언트 자격 증명 전송 방식 (client_secret_basic, client_secret_post, none 중 선택)
             clientAuthenticationMethod: client_secret_basic
             # 7) 리소스 접근 제한 범위
             scope: openid,profile
+            # 8)
+            provider: keycloak
+
+          keycloakWithPKCE:
+            clientId: oauth2-client-app2
+            clientName: oauth2-client-app2
+            clientSecret: 2AkbnfKKbf49xtrYJSW38Mv9fafzO9PD
+            authorizationGrantType: authorization_code
+            scope: openid,profile
+            clientAuthenticationMethod: client_secret_post
+            redirectUri: http://localhost:8081/login/oauth2/code/keycloak
+            provider: keycloak
+
+          keycloak2:
+            clientId: oauth2-client-app3
+            clientName: oauth2-client-app3
+            clientSecret: pdFMU2W6X9LvLLbX8wecI85zbm6MGDnt
+            authorizationGrantType: implicit
+            scope: openid,profile
+            clientAuthenticationMethod: none
+            redirectUri: http://localhost:8081/home
+            provider: keycloak
         ## 2. 공급자 설정
         provider:
           keycloak:
